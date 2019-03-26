@@ -2,11 +2,18 @@
 
 namespace App\Exceptions;
 
+use App;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
+    use ApiHandler;
     /**
      * A list of the exception types that are not reported.
      *
@@ -46,6 +53,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isApiCall($request) &&
+            App::environment('production', 'staging', 'debug', 'local')
+        ) {
+            return $this->renderError($request, $exception);
+        }
         return parent::render($request, $exception);
     }
 }

@@ -53,6 +53,14 @@ return [
             'days' => 14,
         ],
 
+        'request' => [
+            'driver' => 'daily',
+            'path' => storage_path("logs/laravel-request-www-data.log"),
+            'level' => 'debug',
+            'days' => 2,
+            'tap' => [\App\Ship\Logging\JoJoTooLog::class]
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

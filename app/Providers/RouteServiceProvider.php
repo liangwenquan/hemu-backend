@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,9 +36,27 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        $domainName = config('app.url');
 
-        $this->mapWebRoutes();
+        if (App::environment("local")) {
+            Route::domain("api.$domainName")
+                ->prefix('v1')
+                ->as('v1::')
+                ->middleware(['test'])
+                ->namespace('App\Http\Controllers\Api\v1')
+                ->group(app_path('Http/Routes/ApiV1.php'));
+        } else {
+            Route::domain("api.$domainName")
+                ->prefix('v1')
+                ->as('v1::')
+                ->middleware(['api', 'auth:api'])
+                ->namespace('App\Http\Controllers\Api\v1')
+                ->group(app_path('Http/Routes/ApiV1.php'));
+        }
+
+//        $this->mapApiRoutes();
+
+//        $this->mapWebRoutes();
 
         //
     }

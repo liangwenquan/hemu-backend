@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\LogApiRequest;
 
 class Kernel extends HttpKernel
 {
@@ -41,6 +42,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'mina' => [
+            LogApiRequest::class,
+        ]
     ];
 
     /**
@@ -60,6 +65,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'mina' => \App\Http\Middleware\LogApiRequest::class,
+        'test' => \App\Http\Middleware\RequestLog::class,
     ];
 
     /**
