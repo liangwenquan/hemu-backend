@@ -58,7 +58,7 @@ return [
             'path' => storage_path("logs/laravel-request-www-data.log"),
             'level' => 'debug',
             'days' => 2,
-            'tap' => [\App\Ship\Logging\JoJoTooLog::class]
+            'tap' => [\App\Ship\Logging\RecordLog::class]
         ],
 
         'slack' => [

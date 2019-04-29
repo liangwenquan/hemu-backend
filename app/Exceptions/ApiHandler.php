@@ -58,7 +58,8 @@ trait ApiHandler
             $msg = '哎呀，小囧出错了～';
             $errcode = 50001;
         } else {
-            // dd($e);
+            $msg = $e->getMessage();
+            $errcode = 42000;
         }
 
         return $this->packError($statusCode, $errcode, $msg);

@@ -50,6 +50,11 @@ return [
         'mina' => [
             'driver' => 'jwt',
             'provider' => 'users',
+        ],
+
+        'platform' => [
+            'driver' => 'jwt',
+            'provider' => 'platform_users',
         ]
     ],
 
@@ -75,7 +80,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'platform_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

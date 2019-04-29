@@ -53,11 +53,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($this->isApiCall($request) &&
-            App::environment('production', 'staging', 'debug', 'local')
-        ) {
+        if (App::environment('production', 'staging', 'debug', 'local')) {
             return $this->renderError($request, $exception);
         }
+
         return parent::render($request, $exception);
     }
 }

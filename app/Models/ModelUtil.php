@@ -8,7 +8,9 @@
 
 namespace App\Models;
 
+use App\Exceptions\Exception;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 
 class ModelUtil
 {
@@ -68,5 +70,14 @@ class ModelUtil
         return self::$_instance;
     }
 
-    public function getUserInfo(){}
+    public function create($params)
+    {
+        $filteredParams = $this->getValidInputs($params);
+
+        try {
+            return $this->model->create($filteredParams);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 }

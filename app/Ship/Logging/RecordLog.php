@@ -6,7 +6,7 @@ use Illuminate\Log\Logger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Processor\UidProcessor;
 
-class JoJoTooLog
+class RecordLog
 {
     /**
      * @param Logger $logger

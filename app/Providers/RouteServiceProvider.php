@@ -42,7 +42,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::domain("api.$domainName")
                 ->prefix('v1')
                 ->as('v1::')
-                ->middleware(['test'])
+                ->middleware(['mina'])
                 ->namespace('App\Http\Controllers\Api\v1')
                 ->group(app_path('Http/Routes/ApiV1.php'));
         } else {
@@ -53,6 +53,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace('App\Http\Controllers\Api\v1')
                 ->group(app_path('Http/Routes/ApiV1.php'));
         }
+
+        Route::domain("admin.$domainName")
+//            ->middleware(['ajax', 'balancer.db:read_admin'])
+            ->namespace('App\Http\Controllers\Platform')
+            ->group(app_path('Http/Routes/Platform.php'));
 
 //        $this->mapApiRoutes();
 
