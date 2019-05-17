@@ -89,7 +89,7 @@ trait PackApiresponse
     public function packApiException($exceptionName, $msg = null)
     {
         $exception = config("api-exception.$exceptionName");
-        $errcode = $exception['errcode'];
+        $errcode = $exception['code'];
 
         if (!isset($exception['msg']) && is_null($msg))
             throw new \Exception('Api exception msg not set');

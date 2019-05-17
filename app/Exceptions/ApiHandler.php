@@ -79,7 +79,7 @@ trait ApiHandler
     public function packError($statusCode, $errcode, $msg)
     {
         $responseJson = [
-            'errcode' => $errcode,
+            'code' => $errcode,
             'msg'     => $msg
         ];
 
@@ -89,7 +89,7 @@ trait ApiHandler
     protected function errcode($string)
     {
         $config = config('api-exception');
-        return $config[$string]['errcode'];
+        return $config[$string]['code'];
     }
 
     protected function msg($string)

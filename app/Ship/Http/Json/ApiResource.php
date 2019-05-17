@@ -18,7 +18,7 @@ class ApiResource extends Resource
     public function with($request)
     {
         return [
-            'errcode' => 0,
+            'code' => 0,
             'msg' => 'ok'
         ];
     }

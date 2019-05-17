@@ -19,6 +19,7 @@ class CreateAdminUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
+            $table->string('roles', 66)->nullable()->comment('权限组');
             $table->rememberToken();
             $table->timestamps();
         });

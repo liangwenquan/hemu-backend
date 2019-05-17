@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\Exceptions\Exception;
 use App\Models\AdminUser;
+use App\Resources\AdminUserInfoResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Models\ModelUtil;
@@ -19,13 +20,14 @@ class AdminUserController extends ApiController
 
     public function login()
     {
-        $credentials = request(['name', 'password']);
+        $credentials['name'] = request('username');
+        $credentials['password'] = request('password');
 
         $token = auth('platform')->attempt($credentials);
 
         return $this->packOk([
             'token' => $token,
-            'token_type' => 'bearer',
+            'token_type' => 'Bearer',
             'expires_in' => auth('platform')->factory()->getTTL() * 60
         ]);
     }
@@ -38,7 +40,7 @@ class AdminUserController extends ApiController
             return $this->pack(401, '用户信息失效，请重新登陆');
         }
 
-        return $this->packOk($userObj->toArray());
+        return new AdminUserInfoResource($userObj);
     }
 
     public function create()
