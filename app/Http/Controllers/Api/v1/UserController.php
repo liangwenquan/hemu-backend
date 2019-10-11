@@ -52,11 +52,17 @@ class UserController extends ApiController
 
         $sessionInfo = $this->wechatMini->auth->session($code);
 
-        $user = User::findOrFail(['wx_openid' => $sessionInfo['openid']]);
+        info($sessionInfo);
 
+        $user = User::query()->where(['wx_openid' => $sessionInfo['openid']])->firstOrFail();
+
+        info($user);
         $token = auth()->login($user);
 
-        return $this->packOk(['token' => $token]);
+        return $this->packOk([
+            'uid' => $user['id'],
+            'token' => $token
+        ]);
     }
 
     public function checkToken()

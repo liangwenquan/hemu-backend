@@ -11,6 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $pagesize = 15;
+    public $pagesize = 10;
 
 }

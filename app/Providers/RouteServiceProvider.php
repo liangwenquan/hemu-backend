@@ -45,6 +45,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware(['mina'])
                 ->namespace('App\Http\Controllers\Api\v1')
                 ->group(app_path('Http/Routes/ApiV1.php'));
+            Route::domain("api.$domainName")
+                ->prefix('lift')
+                ->as('lift::')
+                ->middleware(['mina'])
+                ->namespace('App\Http\Controllers\Api\lift')
+                ->group(app_path('Http/Routes/Lift.php'));
+            Route::domain("api.$domainName")
+                ->prefix('suining')
+                ->as('suining::')
+                ->middleware(['mina'])
+                ->namespace('App\Http\Controllers\Api\suining')
+                ->group(app_path('Http/Routes/Suining.php'));
         } else {
             Route::domain("api.$domainName")
                 ->prefix('v1')
@@ -52,6 +64,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware(['api', 'auth:api'])
                 ->namespace('App\Http\Controllers\Api\v1')
                 ->group(app_path('Http/Routes/ApiV1.php'));
+            Route::domain("api.$domainName")
+                ->prefix('lift')
+                ->as('lift::')
+                ->middleware(['mina'])
+                ->namespace('App\Http\Controllers\Api\lift')
+                ->group(app_path('Http/Routes/Lift.php'));
         }
 
         Route::domain("admin.$domainName")

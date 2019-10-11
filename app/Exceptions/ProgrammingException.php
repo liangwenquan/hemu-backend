@@ -23,7 +23,7 @@ class ProgrammingException extends \Exception implements Responsable
     public function toResponse($request)
     {
         $responseJson = [
-            'errcode' => $this->code,
+            'code' => $this->code,
             'msg'     => $this->message
         ];
 

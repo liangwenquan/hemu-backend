@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8 , 2)->default('0.00')->comment('商品价格');
             $table->integer('shop_id')->nullable()->comment('商店id');
             $table->text('content')->comment('product 富文本信息');
+            $table->string('cover', 500)->comment('商品滑动图');
             $table->tinyInteger('is_recommend')->default(0)->comment('0:false, 1:true');
             $table->integer('weight')->default(0)->comment('排序权重');
             $table->tinyInteger('enabled')->default(1)->comment('是否展示该条数据');

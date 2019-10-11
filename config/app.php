@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Shanghai',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
 //        Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider,
+        App\Providers\GeoIp2ServiceProvider::class,
 
     ],
 

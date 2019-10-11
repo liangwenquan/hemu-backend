@@ -18,6 +18,9 @@ class ModelUtil
 
     protected $columns;
 
+    /** @var array */
+    protected $attributes;
+
     private static $_instance;
 
     private function __construct($model){
@@ -79,5 +82,27 @@ class ModelUtil
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function detail($primaryKey)
+    {
+        return $this->model->findOrFail($primaryKey);
+    }
+
+    public function edit($primaryKey, $params)
+    {
+        $filteredParams = $this->getValidInputs($params);
+        $model = $this->detail($primaryKey);
+
+        return $model->update($filteredParams);
+    }
+
+    public function update($attributes)
+    {
+        $this->model->fill($attributes);
+
+        DB::transaction(function () {
+            $this->model->save();
+        });
     }
 }

@@ -54,7 +54,7 @@ class SimplePaginator
         }
         if ($this->api) {
             $msg = [
-                'errcode' => 0,
+                'code' => 0,
                 'msg' => 'ok'
             ];
             $data = [
